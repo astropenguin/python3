@@ -27,6 +27,7 @@ tqdm = "^4.41.1"
 xarray = "^0.14.1"
 
 [tool.poetry.dev-dependencies]
+pytest = "^5.2"
 
 [build-system]
 requires = ["poetry>=0.12"]
