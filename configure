@@ -1,0 +1,38 @@
+#!/bin/bash
+set -eu
+
+# Install fish wrapper functions of python, ipython, and jupyter
+# so that user can run them without cd to the repository.
+FISHFUNCS=${XDG_CONFIG_HOME:-${HOME}/.config}/fish/functions
+
+
+cat << EOS > ${FISHFUNCS}/has_python3_env.fish
+function has_python3_env
+    if not type -q poetry
+        false
+    end
+
+    if not test -d ${PWD}
+        false
+    end
+
+    true
+end
+EOS
+
+
+for cmd in python ipython jupyter
+do
+cat << EOS > ${FISHFUNCS}/${cmd}.fish
+function ${cmd}
+    if has_python3_env
+        cd ${PWD}
+        set -l envcmd (poetry run which ${cmd})
+        prevd
+        {\$envcmd} {\$argv}
+    else
+        ${cmd} {\$argv}
+    end
+end
+EOS
+done
