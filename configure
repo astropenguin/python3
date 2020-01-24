@@ -4,6 +4,7 @@ set -eu
 # Install fish wrapper functions of python, ipython, and jupyter
 # so that user can run them without cd to the repository.
 FISHFUNCS=${XDG_CONFIG_HOME:-${HOME}/.config}/fish/functions
+PYTHONSTARTUP=${PWD}/startup.py
 
 
 cat << EOS > ${FISHFUNCS}/has_python3_env.fish
@@ -28,6 +29,7 @@ function ${cmd}
     if has_python3_env
         cd ${PWD}
         set -l envcmd (poetry run which ${cmd})
+        set -x PYTHONSTARTUP ${PYTHONSTARTUP}
         prevd
         {\$envcmd} {\$argv}
     else
