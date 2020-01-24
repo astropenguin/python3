@@ -1,5 +1,5 @@
 # python3
-:penguin: Default Python 3 environment managed by [Poetry]
+:penguin: Personal Python 3 environment managed by [Poetry]
 
 ## Installation
 
