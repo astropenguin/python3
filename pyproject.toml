@@ -32,6 +32,8 @@ zarr = "^2.8"
 [tool.poetry.dev-dependencies]
 black = "^21.4b"
 flake8 = "^3.9"
+ipython = "^7.23"
+jupyterlab = "^3.0"
 pytest = "^6.2"
 
 [build-system]
